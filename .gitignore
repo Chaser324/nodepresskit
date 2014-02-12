@@ -1,0 +1,45 @@
+
+tmp
+
+#########
+# Bower #
+#########
+presskit/vendor/bower
+
+########
+# Node #
+########
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+npm-debug.log
+node_modules
+
+################
+# Sublime Text #
+################
+*.sublime-project
+*.sublime-workspace
+
+###########
+# OS Junk #
+###########
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+$RECYCLE.BIN/

@@ -1,0 +1,61 @@
+
+title: Company Name
+founding_date: September 1, 2010
+website: http://www.website.com
+based_in: Cityville, Metropolisland
+
+press_contact: press-contact@company.com
+phone: +00 (1) 22 33 44 55 66
+address: |
+    Address Line 1
+    Address Line 2
+    Address Line 3
+
+social_media:
+    - name: twitter.com/MyCompanyName
+      link: twitter.com/MyCompanyName
+    - name: facebook.com/MyCompanyName
+      link: facebook.com/MyCompanyName
+    - name: Skype
+      link: callto:MySkypeName
+
+description: >
+    We're games studio and we make games. We're also capable of editing XML files.
+
+history:
+    - header: Early History
+      text: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel nisi dolor. Pellentesque vitae eros velit, quis venenatis orci. Phasellus elit urna, semper ut gravida et, porta non dui. Aliquam erat volutpat. Aenean porta volutpat imperdiet. Maecenas venenatis, tellus eget vehicula vulputate, augue erat elementum quam, tincidunt laoreet magna orci et mauris. Proin porttitor pharetra nisi, accumsan sollicitudin neque varius a. Aenean ut massa ipsum, id hendrerit lacus. Maecenas posuere egestas nunc at cursus. Etiam mollis libero vel eros pulvinar aliquam. Sed vitae turpis sed nibh venenatis dictum. Sed suscipit orci justo, at sagittis ante. Sed leo nisl, ultricies in fermentum id, aliquam id dolor. Ut laoreet, felis id posuere bibendum, arcu ipsum lacinia est, eu lobortis velit enim eget mi. In ullamcorper ullamcorper enim ut gravida. Vivamus rutrum lacus mollis risus malesuada iaculis.
+    - header: After That
+      text: >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel nisi dolor. Pellentesque vitae eros velit, quis venenatis orci. Phasellus elit urna, semper ut gravida et, porta non dui. Aliquam erat volutpat. Aenean porta volutpat imperdiet. Maecenas venenatis, tellus eget vehicula vulputate, augue erat elementum quam, tincidunt laoreet magna orci et mauris. Proin porttitor pharetra nisi, accumsan sollicitudin neque varius a. Aenean ut massa ipsum, id hendrerit lacus. Maecenas posuere egestas nunc at cursus. Etiam mollis libero vel eros pulvinar aliquam. Sed vitae turpis sed nibh venenatis dictum. Sed suscipit orci justo, at sagittis ante. Sed leo nisl, ultricies in fermentum id, aliquam id dolor. Ut laoreet, felis id posuere bibendum, arcu ipsum lacinia est, eu lobortis velit enim eget mi. In ullamcorper ullamcorper enim ut gravida. Vivamus rutrum lacus mollis risus malesuada iaculis.
+
+trailers:
+    - name: This video is nice
+      youtube: 7jQbITg0MSk
+    - name: This one too
+      youtube: 0CevOaYrYDA
+      vimeo: 12536488
+
+awards:
+    - description: Winner in this highly relevant contest.
+      info: Award Location, 20 Octover, 2989
+    - description: Nomination for this prestigious award.
+      info: Award Ceremony, 4 December, 2991
+    - description: Winner in this highly relevant contest.
+      info: Award Location, 20 Octover, 2989
+    - description: Nomination for this prestigious award.
+      info: Award Ceremony, 4 December, 2991
+
+quotes:
+    - description: This is a rather insignificant quote by a highly important person.
+      name: Person Name
+      website: Website
+      link: http://www.website.com
+    - description: An extremely positive quote from a rather insignificant person. Also great.
+      name: Some Guy
+      website: This Page Is Visited By 12 Visitors A Month
+      link: http://geocities.blog.com
+
+press_can_request_copy: true
+video_monetization_allowed: true

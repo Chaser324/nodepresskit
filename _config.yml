@@ -1,0 +1,28 @@
+# =============================================
+# Build config
+# =============================================
+
+root:             dist
+dest:             <%= site.root %>
+assets:           <%= site.dest %>/assets
+
+# Data
+data:             data/*.{json,yml}
+
+# Templates
+templates:        templates
+includes:         <%= site.templates %>/includes/*.hbs
+layouts:          <%= site.templates %>/layouts
+layout:           default.hbs
+
+# Extensions
+helpers:          
+  - <%= site.templates %>/helpers/*.js
+  - handlebars-helper-br
+
+plugins:
+  - assemble-contrib-anchors
+
+# Theme
+# theme:            theme
+# components:       <%= site.theme %>/components
