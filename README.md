@@ -36,7 +36,13 @@ npm install
 * Upload the contents of the `dist` directory to your server.
 
 
+## Credits & Thanks
 
+**Rami Ismail** - Author of the original presskit(), Business & Development @ Vlambeer - [Twitter](https://twitter.com/tha_rami), [GitHub](https://github.com/ramiismail)
+
+**Chase Pettit** - Author of nodepresskit - [Twitter](https://twitter.com/chasepettit), [GitHub](https://github.com/chaser324)
+
+The entire indie games community at large for being so incredibly supportive and inspiring.
 
 
 
