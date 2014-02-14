@@ -1,0 +1,9 @@
+{
+  "name": "nodepresskit",
+  "main": [
+    "Gruntfile.coffee"
+  ],
+  "dependencies": {
+  },
+  "version": "0.1.0"
+}

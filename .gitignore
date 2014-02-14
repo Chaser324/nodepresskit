@@ -9,7 +9,7 @@ data/**/trailers/*
 #########
 # Bower #
 #########
-presskit/vendor/bower
+assets/vendor/bower
 
 ########
 # Node #

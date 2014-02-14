@@ -27,7 +27,10 @@
             {{/each}}
         </p>
         <p>
-            <strong>TODO: Releases:</strong>
+            <strong>Releases:</strong><br>
+            {{#each games}}
+                <a href="games/{{this}}">{{capitalize this}}</a><br>
+            {{/each}}
         </p>
         <p>
             <strong>Address:</strong><br>
@@ -47,7 +50,12 @@
             <h3>{{header}}</h3>
             <p>{{text}}</p>
         {{/each}}
-        <h2 id="history">TODO: Projects</h2>
+        <h2 id="history">Projects</h2>
+        <ul>
+        {{#each games}}
+            <li><a href="games/{{this}}">{{capitalize this}}</a></li>
+        {{/each}}
+        </ul>
     </div>
 
 </div>
@@ -67,6 +75,21 @@
         {{/each}}
 
         <h2 id="images">Images</h2>
+        {{#if images_zip}}
+            <a href="{{images_zip}}">
+            <div class="alert alert-info">
+                download all screenshots &amp; photos as .zip ({{images_zip_size}})
+            </div>
+            </a>
+        {{/if}}
+        <div class="row image-grid">
+            {{#each images}}
+                <div class="col-md-6">
+                    <a href="{{this}}"><img style="width: 100%; margin-bottom: 15px;" src="{{this}}" /></a>
+                </div>
+            {{/each}}
+        </div>
+        <p>There are far more images available for {{company.name}}, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#contact">contact us</a>!
 
         <h2 id="logo">Logo &amp; Icon</h2>
 
