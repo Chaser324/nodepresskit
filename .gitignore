@@ -1,5 +1,10 @@
 
 tmp
+dist
+data/images/*
+data/trailers/*
+data/**/images/*
+data/**/trailers/*
 
 #########
 # Bower #

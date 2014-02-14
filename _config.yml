@@ -21,7 +21,7 @@ helpers:
   - handlebars-helper-br
 
 plugins:
-  - assemble-contrib-anchors
+  # - assemble-contrib-anchors
 
 # Theme
 # theme:            theme

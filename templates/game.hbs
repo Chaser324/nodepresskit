@@ -1,0 +1,126 @@
+
+<div class="row">
+
+    <div class="col-md-4">
+        <h2 id="factsheet">Factsheet</h2>
+        <p>
+            <strong>Developer:</strong><br>
+            <a href="../../">{{company.title}}</a><br>
+            Based in {{company.based_in}}
+        </p>
+        <p>
+            <strong>Release Date:</strong><br>
+            {{game.release_date}}
+        </p>
+        <p>
+            <strong>Platforms:</strong><br>
+            {{#each game.platforms}}
+                <a href="{{link}}">{{name}}</a><br>
+            {{/each}}
+        </p>
+        <p>
+            <strong>Website:</strong><br>
+            <a href="{{game.website}}">{{parselink game.website}}</a>
+        </p>
+        <p>
+            <strong>Regular Price:</strong><br>
+            {{#each game.prices}}
+                {{currency}} {{price}}<br>
+            {{/each}}
+        </p>
+    </div>
+
+    <div class="col-md-8">
+        <h2 id="description">Description</h2>
+        <p>{{game.description}}</p>
+        <h2 id="history">History</h2>
+        <p>{{game.history}}</p>
+        <h2 id="features">Features</h2>
+        <ul>
+            {{#each game.features}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h2 id="videos">Videos</h2>
+        {{#unless game.trailers}}
+            <p>There are currently no trailers available for {{game.title}}. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>
+        {{/unless}}
+
+        {{#each game.trailers}}
+            <p>
+                <strong>{{name}}</strong>&nbsp;{{videolist this}}
+            </p>
+        {{/each}}
+
+        <h2 id="images">Images</h2>
+
+        <h2 id="logo">Logo &amp; Icon</h2>
+
+        <h2 id="awards">Awards &amp; Recognition</h2>
+        <ul>
+            {{#each game.awards}}
+                <li>"{{description}}" <em>- {{info}}</em></li>
+            {{/each}}
+        </ul>
+
+        <h2 id="quotes">Selected Articles</h2>
+        <ul>
+            {{#each game.quotes}}
+                <li>"{{description}}"<br><em>- {{name}}, <a href="{{link}}">{{website}}</a></em></li>
+            {{/each}}
+        </ul>
+
+        <h2 id="links">Additional Links</h2>
+        {{#each game.additional_links}}
+            <p>
+                <strong>{{title}}</strong><br>
+                {{description}} <a href="{{link}}">{{parselink link}}</a>
+            </p>
+        {{/each}}
+
+        <h2>About {{company.title}}</h2>
+        <p>
+            <strong>Boilerplate</strong><br>
+            {{company.boilerplate}}
+        </p>
+        <p>
+            <strong>More Information</strong><br>
+            More information on {{company.title}}, our logo &amp; relevant media are available <a href="../../">here</a>.
+        </p>
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 id="credits">{{game.title}} Credits</h2>
+        {{#each game.credits}}
+            <p>
+                <strong>{{name}}</strong><br>
+                {{#if website}}<a href="{{website}}">{{/if}} {{role}} {{#if website}}</a>{{/if}}
+            </p>
+        {{/each}}
+    </div>
+    <div class="col-md-6">
+        <h2 id="contact">Contact</h2>
+        {{#each company.contacts}}
+            <p>
+                <strong>{{name}}</strong><br>
+                {{#if mail}}
+                    <a href="mailto:{{mail}}">{{mail}}</a>
+                {{else}} {{#if link}}
+                    <a href="{{link}}">{{parselink link}}</a>
+                {{/if}}{{/if}}
+            </p>
+        {{/each}}
+    </div>
+</div>
+

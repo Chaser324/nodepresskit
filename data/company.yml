@@ -19,6 +19,9 @@ social_media:
     - name: Skype
       link: callto:MySkypeName
 
+boilerplate: >
+    Company Name is an independent game studio that has been making games since 2010 and is best known for Smash Hit Indie Game.
+
 description: >
     We're games studio and we make games. We're also capable of editing XML files.
 
@@ -36,6 +39,7 @@ trailers:
     - name: This one too
       youtube: 0CevOaYrYDA
       vimeo: 12536488
+      mp4: test.mp4
 
 awards:
     - description: Winner in this highly relevant contest.
@@ -59,3 +63,37 @@ quotes:
 
 press_can_request_copy: true
 video_monetization_allowed: true
+
+additional_links:
+    - title: Company Link 1
+      description: This link is a link that might be useful. You can check it out at
+      link: http://somemusicsite.com/thislink
+    - title: Company Link 2
+      description: This link is another link you might like. Find it at
+      link: http://somemusicsite.com/thislink
+
+credits:
+    - name: John Doe
+      role: Artist, Freelancer
+    - name: Oliver Twist
+      website: www.olivertwist.com
+      role: Music, Freelancer
+
+contacts:
+    - name: Inquiries
+      mail: rami@vlambeer.com
+    - name: Twitter
+      link: http://twitter.com/MyCompanyName
+    - name: Facebook
+      link: http://facebook.com/MyCompanyName
+    - name: Web
+      link: MyCompanyName.com
+
+
+
+
+
+
+
+
+

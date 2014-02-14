@@ -1,0 +1,123 @@
+
+<div class="row">
+
+    <div class="col-md-4">
+        <h2 id="factsheet">Factsheet</h2>
+        <p>
+            <strong>Developer:</strong><br>
+            <a href="">{{company.title}}</a><br>
+            Based in {{company.based_in}}
+        </p>
+        <p>
+            <strong>Founding Date:</strong><br>
+            {{company.founding_date}}
+        </p>
+        <p>
+            <strong>Website:</strong><br>
+            <a href="{{company.website}}">{{parselink company.website}}</a>
+        </p>
+        <p>
+            <strong>Press / Business Contact:</strong><br>
+            <a href="mailto:{{company.press_contact}}">{{company.press_contact}}</a>
+        </p>
+        <p>
+            <strong>Social:</strong><br>
+            {{#each company.social_media}}
+                <a href="{{link}}">{{name}}</a><br>
+            {{/each}}
+        </p>
+        <p>
+            <strong>TODO: Releases:</strong>
+        </p>
+        <p>
+            <strong>Address:</strong><br>
+            {{breaklines company.address}}
+        </p>
+        <p>
+            <strong>Phone:</strong><br>
+            {{company.phone}}
+        </p>
+    </div>
+
+    <div class="col-md-8">
+        <h2 id="description">Description</h2>
+        <p>{{company.description}}</p>
+        <h2 id="history">History</h2>
+        {{#each company.history}}
+            <h3>{{header}}</h3>
+            <p>{{text}}</p>
+        {{/each}}
+        <h2 id="history">TODO: Projects</h2>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+
+        <h2 id="videos">Videos</h2>
+        {{#unless company.trailers}}
+            <p>There are currently no trailers available for {{company.title}}. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>
+        {{/unless}}
+
+        {{#each company.trailers}}
+            <p>
+                <strong>{{name}}</strong>&nbsp;{{videolist this}}
+            </p>
+        {{/each}}
+
+        <h2 id="images">Images</h2>
+
+        <h2 id="logo">Logo &amp; Icon</h2>
+
+        <h2 id="awards">Awards &amp; Recognition</h2>
+        <ul>
+            {{#each company.awards}}
+                <li>"{{description}}" <em>- {{info}}</em></li>
+            {{/each}}
+        </ul>
+
+        <h2 id="quotes">Selected Articles</h2>
+        <ul>
+            {{#each company.quotes}}
+                <li>"{{description}}"<br><em>- {{name}}, <a href="{{link}}">{{website}}</a></em></li>
+            {{/each}}
+        </ul>
+
+        <h2 id="links">Additional Links</h2>
+        {{#each company.additional_links}}
+            <p>
+                <strong>{{title}}</strong><br>
+                {{description}} <a href="{{link}}">{{parselink link}}</a>
+            </p>
+        {{/each}}
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2 id="credits">Team &amp; Repeating Collaborators</h2>
+        {{#each company.credits}}
+            <p>
+                <strong>{{name}}</strong><br>
+                {{#if website}}<a href="{{website}}">{{/if}} {{role}} {{#if website}}</a>{{/if}}
+            </p>
+        {{/each}}
+    </div>
+    <div class="col-md-6">
+        <h2 id="contact">Contact</h2>
+        {{#each company.contacts}}
+            <p>
+                <strong>{{name}}</strong><br>
+                {{#if mail}}
+                    <a href="mailto:{{mail}}">{{mail}}</a>
+                {{else}} {{#if link}}
+                    <a href="{{link}}">{{parselink link}}</a>
+                {{/if}}{{/if}}
+            </p>
+        {{/each}}
+    </div>
+</div>
+
