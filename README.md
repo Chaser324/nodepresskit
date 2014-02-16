@@ -12,8 +12,13 @@
 
 ## Quickstart
 
-#### 0. Install NPM
+#### 0. Install NPM & Grunt.js
 * NPM is included with Node.js - if you don't already have it, you can get it at [http://nodejs.org/](http://nodejs.org/)
+* With NPM installed, you can globally install the Grunt.js CLI (command line interface) by running the following command at the command line:
+
+````bash
+npm install -g grunt-cli
+````
 
 #### 1. Download this project
 Do *one* of the following:
@@ -30,8 +35,23 @@ npm install
 
 #### 3. Enter your info
 
+Everything you need to edit is inside of the `data` directory.
+
+* Edit the `company.yml` file with all of the information about your studio. 
+* Put all studio relevant photos/screenshots and logos (.jpg/.png/.gif) into the `images` and `logos` directories respectively. Optionally, you can include a single .zip archive in each directory.
+* Put a `header.{png/jpg/gif}` image in the `images` directory to be displayed at the top of the page.
+* Put videos into the `trailers` directory and edit your `company.yml` file with mp4 tags referring to the individual filenames.
+
+All of your projects live in the `data/games` directory. Refer to the `sample_game` for an example.
+
+* It is recommended that you copy the `sample_game` directory and rename it to the title of your project - all lowercase and replacing whitespace with underscores.
+* Edit the `game.yml` file with information about the project.
+* Put all screenshots and logos (.jpg/.png/.gif) into the game's `images` and `logos` directories respectively. Optionally, you can include a single .zip archive in each directory.
+* Put a `header.{png/jpg/gif}` image in the `images` directory to be displayed at the top of the page.
+* Put videos into the `trailers` directory and edit your `game.yml` file with mp4 tags referring to the individual filenames.
 
 #### 4. Build and upload
+* To preview your site, run `grunt dev` at the command line and point your browser to http://localhost:8080 (press CTRL-C to stop previewing). 
 * To do a final build, just run `grunt` from the command line.
 * Upload the contents of the `dist` directory to your server.
 

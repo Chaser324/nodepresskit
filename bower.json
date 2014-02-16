@@ -3,7 +3,16 @@
   "main": [
     "Gruntfile.coffee"
   ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "assets/vendor/bower"
+  ],
   "dependencies": {
+    "bootstrap": "~3.1.1",
+    "imagesLoaded": "~3.1.4",
+    "masonry": "~3.1.4"
   },
   "version": "0.1.0"
 }
