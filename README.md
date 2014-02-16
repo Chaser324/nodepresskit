@@ -68,5 +68,5 @@ The entire indie games community at large for being so incredibly supportive and
 
 
 
-[download]: https://github.com/chasepettit/nodepresskit/archive/master.zip "Download boilerplate-bootstrap"
+[download]: https://github.com/Chaser324/nodepresskit/archive/master.zip "Download boilerplate-bootstrap"
 
