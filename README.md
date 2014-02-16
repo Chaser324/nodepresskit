@@ -1,9 +1,14 @@
 # nodepresskit
 > An implementation of [@ramiismail](https://github.com/ramiismail)'s [presskit()](https://github.com/ramiismail/dopresskit) using [Assemble](http://assemble.io) - a Node.js/Grunt.js based static site builder.
+> *This is currently in active development and should be considered a beta. Please contact Chase Pettit via [e-mail](chasepettit@gmail.com) or [Twitter](https://twitter.com/chasepettit) with any issues or suggestions. Thanks.*
 
 ## About presskit()
 
+[presskit()](http://dopresskit.com/) (pronounced 'do presskit') was originally developed by Vlambeer's Rami Ismail to be a quick and easy solution for developers to share everything that the press needs to write timely and well-informed articles.
+
 ## Differences in nodepresskit
+
+nodepresskit is derived directly from the original presskit(), but it offers some options that might be preferable for some. Primarily, nodepresskit is intended to make the presskit() site fully static - removing the need for PHP and opening up cheaper, easier, and more robust hosting options such as Amazon S3.
 
 * **No PHP required.** - Removing the need for PHP makes presskit() a fully static site. This means that you can now opt for static site hosting options like Amazon S3 that are significantly cheaper and easier to maintain than shared hosting or a VPS, and rock-solid enough to handle the massive amount of traffic your site will generate.
 * **YAML data files.** - YAML offers a cleaner and simpler syntax over XML, making it easier for you to fill in your info and move on with your actual work.
