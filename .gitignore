@@ -2,8 +2,10 @@
 tmp
 dist
 data/images/*
+data/logos/*
 data/trailers/*
 data/**/images/*
+data/**/logos/*
 data/**/trailers/*
 
 #########

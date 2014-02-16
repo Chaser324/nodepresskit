@@ -1,3 +1,10 @@
+<div class="row">
+    <div class="col-md-12">
+        {{#if image_header}}
+            <img class="img-responsive" src="{{image_header}}" />
+        {{/if}}
+    </div>
+</div>
 
 <div class="row">
 
@@ -48,7 +55,9 @@
 <div class="row">
     <div class="col-md-12">
 
-        <h2 id="videos">Videos</h2>
+        <hr>
+
+        <h2 id="trailers">Videos</h2>
         {{#unless game.trailers}}
             <p>There are currently no trailers available for {{game.title}}. Check back later for more or <a href="#contact">contact us</a> for specific requests!</p>
         {{/unless}}
@@ -59,9 +68,48 @@
             </p>
         {{/each}}
 
+        <hr>
+
         <h2 id="images">Images</h2>
+        {{#if images_zip}}
+            <a href="{{images_zip}}">
+            <div class="alert alert-info">
+                download all screenshots &amp; photos as .zip ({{images_zip_size}})
+            </div>
+            </a>
+        {{/if}}
+        <div class="row image-grid">
+            {{#each images}}
+                <div class="col-md-6">
+                    <a href="{{this}}"><img style="width: 100%; margin-bottom: 15px;" src="{{this}}" /></a>
+                </div>
+            {{/each}}
+        </div>
+        <p>There are far more images available for {{game.title}}, but these are the ones we felt would be most useful to you. If you have specific requests, please do <a href="#contact">contact us</a>!
+
+        <hr>
 
         <h2 id="logo">Logo &amp; Icon</h2>
+        {{#unless logos}}{{#unless logos_zip}}
+            There are currently no logos or icons available for {{game.title}}. Check back later for more or <a href="#contact">contact us</a> for specific requests!
+        {{/unless}}{{/unless}}
+
+        {{#if logos_zip}}
+            <a href="{{logos_zip}}">
+            <div class="alert alert-info">
+                download all screenshots &amp; photos as .zip ({{logos_zip_size}})
+            </div>
+            </a>
+        {{/if}}
+        <div class="row image-grid">
+            {{#each logos}}
+                <div class="col-md-6">
+                    <a href="{{this}}"><img style="width: 100%; margin-bottom: 15px;" src="{{this}}" /></a>
+                </div>
+            {{/each}}
+        </div>
+
+        <hr>
 
         <h2 id="awards">Awards &amp; Recognition</h2>
         <ul>
@@ -70,12 +118,44 @@
             {{/each}}
         </ul>
 
+        <hr>
+
         <h2 id="quotes">Selected Articles</h2>
         <ul>
             {{#each game.quotes}}
                 <li>"{{description}}"<br><em>- {{name}}, <a href="{{link}}">{{website}}</a></em></li>
             {{/each}}
         </ul>
+
+        <hr>
+
+        {{#if game.video_monetization_allowed}}
+        <h2 id="pressrequest">Request Press Copy</h2>
+        <p>Please send us a <a href="#contact">quick email</a> to request a press copy, and we'll get back to you as soon as possible.</p>
+        <p>Be sure to indicate your company name in your e-mail</p>
+
+        <hr>
+        {{/if}}
+
+        {{#if game.video_monetization_allowed}}
+        <h2 id="monetize">Monetization Permission</h2>
+
+        {{#is game.video_monetization_allowed "no"}}
+            {{company.title}} currently does not allow for the contents of {{game.title}} to be published through video broadcasting services.
+        {{/is}}
+        {{#is game.video_monetization_allowed "ask"}}
+            {{company.title}} allows the contents of {{game.title}} to be published through video broadcasting services only with direct written permission from {{company.title}}. Check at the bottom of this page for <a href="#contact">contact information</a>.
+        {{/is}}
+        {{#is game.video_monetization_allowed "non-commercial"}}
+            {{company.title}} allows for the contents of {{game.title}} to be published through video broadcasting services for non-commercial purposes only. Monetization of any video created containing assets from {{game.title}} is not allowed.
+        {{/is}}
+        {{#is game.video_monetization_allowed "monetize"}}
+            {{company.title}} allows for the contents of {{game.title}} to be published through video broadcasting services for any commercial or non-commercial purposes. Monetization of videos created containing assets from {{game.title}} is legally &amp; explicitly allowed by {{company.title}}.
+        {{/is}}
+
+        <hr>
+        {{/if}}
+    
 
         <h2 id="links">Additional Links</h2>
         {{#each game.additional_links}}
@@ -85,7 +165,9 @@
             </p>
         {{/each}}
 
-        <h2>About {{company.title}}</h2>
+        <hr>
+
+        <h2 id="about">About {{company.title}}</h2>
         <p>
             <strong>Boilerplate</strong><br>
             {{company.boilerplate}}
@@ -95,6 +177,7 @@
             More information on {{company.title}}, our logo &amp; relevant media are available <a href="../../">here</a>.
         </p>
 
+        <hr>
 
     </div>
 </div>

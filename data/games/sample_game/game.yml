@@ -63,7 +63,13 @@ quotes:
       link: http://geocities.blog.com
 
 press_can_request_copy: true
-video_monetization_allowed: true
+
+# Monetization options 
+# 'no' - No video allowed
+# 'ask' - Direct written permission must be requested to use video
+# 'non-commercial' - Video can be published for non-commercial purposes
+# 'monetize' - Video is fully allowed for commericial and non-commercial purposes
+video_monetization_allowed: monetize
 
 additional_links:
     - title: Original Soundtrack

@@ -46,7 +46,10 @@ module.exports = (grunt) ->
     assembleConfig.company.options = clone(assembleBaseOptions)
     assembleConfig.company.options.data = 'data/company.yml'
     assembleConfig.company.options.games = games
-    assembleConfig.company.options.images = grunt.file.expand {cwd: 'data'}, 'images/*.{png,jpg,gif,tiff}'
+    assembleConfig.company.options.logos = grunt.file.expand {cwd: 'data'}, 'logos/*.{png,jpg,gif,tiff}'
+    assembleConfig.company.options.logos_zip = grunt.file.expand {cwd: 'data'}, 'logos/*.zip'
+    assembleConfig.company.options.images = grunt.file.expand {cwd: 'data'}, ['images/*.{png,jpg,gif,tiff}', '!images/header.{png,jpg,gif,tiff}']
+    assembleConfig.company.options.image_header = grunt.file.expand {cwd: 'data'}, 'images/header.{png,jpg,gif,tiff}'
     assembleConfig.company.options.images_zip = grunt.file.expand {cwd: 'data'}, 'images/*.zip'
     if grunt.file.exists 'data/' + assembleConfig.company.options.images_zip
         size = fs.statSync('data/' + assembleConfig.company.options.images_zip).size
@@ -57,7 +60,21 @@ module.exports = (grunt) ->
             size = (size / 1024) / 1024
             size = parseInt(size) + 'MB'
         assembleConfig.company.options.images_zip_size = size
+    if grunt.file.exists 'data/' + assembleConfig.company.options.logos_zip
+        size = fs.statSync('data/' + assembleConfig.company.options.logos_zip).size
+        if size > 1024 and size < 1048576
+            size = size / 1024
+            size = parseInt(size) + 'KB'
+        else if size >= 1048576
+            size = (size / 1024) / 1024
+            size = parseInt(size) + 'MB'
+        assembleConfig.company.options.logos_zip_size = size
     assembleConfig.company.files = '<%= site.dest %>/index.html': ['<%= site.templates %>/company.hbs']
+
+    assembleConfig.credits = {}
+    assembleConfig.credits.options = clone(assembleBaseOptions)
+    assembleConfig.credits.files = '<%= site.dest %>/credits.html': ['<%= site.templates %>/credits.hbs']
+        
 
     # Options for game pages
     for game in games
@@ -67,7 +84,30 @@ module.exports = (grunt) ->
         assembleConfig[game] = {}
         assembleConfig[game].options = clone(assembleBaseOptions)
         assembleConfig[game].options.data = [dataFile, 'data/company.yml']
+        assembleConfig[game].options.logos = grunt.file.expand {cwd: 'data/games/' + game}, 'logos/*.{png,jpg,gif,tiff}'
+        assembleConfig[game].options.logos_zip = grunt.file.expand {cwd: 'data/games/' + game}, 'logos/*.zip'
+        assembleConfig[game].options.images = grunt.file.expand {cwd: 'data/games/' + game}, ['images/*.{png,jpg,gif,tiff}', '!images/header.{png,jpg,gif,tiff}']
+        assembleConfig[game].options.image_header = grunt.file.expand {cwd: 'data/games/' + game}, 'images/header.{png,jpg,gif,tiff}'
+        assembleConfig[game].options.images_zip = grunt.file.expand {cwd: 'data/games/' + game}, 'images/*.zip'
         assembleConfig[game].files = {}
+        if grunt.file.exists 'data/games/' + game + '/' + assembleConfig[game].options.images_zip
+            size = fs.statSync('data/games/' + game + '/' + assembleConfig[game].options.images_zip).size
+            if size > 1024 and size < 1048576
+                size = size / 1024
+                size = parseInt(size) + 'KB'
+            else if size >= 1048576
+                size = (size / 1024) / 1024
+                size = parseInt(size) + 'MB'
+            assembleConfig[game].options.images_zip_size = size
+        if grunt.file.exists 'data/games/' + game + '/' + assembleConfig[game].options.logos_zip
+            size = fs.statSync('data/games/' + game + '/' + assembleConfig[game].options.logos_zip).size
+            if size > 1024 and size < 1048576
+                size = size / 1024
+                size = parseInt(size) + 'KB'
+            else if size >= 1048576
+                size = (size / 1024) / 1024
+                size = parseInt(size) + 'MB'
+            assembleConfig[game].options.logos_zip_size = size
         assembleConfig[game].files[destFile] = ['<%= site.templates %>/game.hbs']
 
     
@@ -85,12 +125,19 @@ module.exports = (grunt) ->
             main:
                 files: [
                     {
-                        src: ['**/images/*','**/trailers/*']
+                        src: ['**/images/*','**/trailers/*','**/logos/*']
                         dest: 'dist'
                         cwd: 'data'
                         expand: true
                     }
                 ]
+
+        less:
+            main:
+                options:
+                    paths: ['assets/less']
+                files:
+                    'dist/assets/css/style.min.css': 'assets/less/app.less'
 
         uglify:
             main:
@@ -150,22 +197,30 @@ module.exports = (grunt) ->
         watch:
             options:
                 livereload: true
+            less:
+                files: ["assets/css/*", "assets/less/*"]
+                tasks: ["less"]
             copy:
                 files: ["data/images/*", "data/trailers/*", "data/**/images/*", "data/**/trailers/*"]
-                tasks: ["clean", "copy", "assemble"]
+                tasks: ["clean", "coffee", "uglify", "less", "copy", "assemble"]
             assemble:
-                files: ["data/*.yml", "data/**/*.yml"]
-                tasks: ["clean", "copy", "assemble"]
+                files: ["data/*.yml", "data/**/*.yml", 'templates/*', 'templates/**/*']
+                tasks: ["clean", "coffee", "uglify", "less", "copy", "assemble"]
 
     grunt.loadNpmTasks 'grunt-contrib-clean'
     grunt.loadNpmTasks "grunt-contrib-connect"
     grunt.loadNpmTasks 'grunt-contrib-copy'
     grunt.loadNpmTasks 'grunt-contrib-coffee'
+    grunt.loadNpmTasks 'grunt-contrib-less'
     grunt.loadNpmTasks 'grunt-contrib-uglify'
     grunt.loadNpmTasks 'grunt-contrib-watch'
     grunt.loadNpmTasks 'assemble'
 
     grunt.registerTask 'default', [
-        'clean', 'coffee', 'uglify', 'copy', 'assemble'
+        'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble'
+    ]
+
+    grunt.registerTask 'dev', [
+        'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble', 'connect', 'watch'
     ]
 

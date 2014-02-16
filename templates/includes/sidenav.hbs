@@ -1,38 +1,44 @@
-<style>
-    .affix {
-        top: 10px;
-    }
-</style>
 
+<div data-spy="affix" data-offset-top="10">
 
 {{#if game}}
 
-<div data-spy="affix" data-offset-top="10">
-    <h1>{{game.title}}</h1>
-    A Game by <a href="../../">{{company.title}}</a>
+    <h1 class="nav-header">{{game.title}}</h1>
+    <a class="nav-header" href="../../">{{company.title}}</a>
 
     <ul class="nav nav-pills nav-stacked">
         <li><a href="#factsheet">Factsheet</a></li>
         <li><a href="#description">Description</a></li>
         <li><a href="#history">History</a></li>
-        <li><a href="#projects">Projects</a></li>
+        <li><a href="#features">Features</a></li>
         <li><a href="#trailers">Videos</a></li>
         <li><a href="#images">Images</a></li>
         <li><a href="#logo">Logo &amp; Icon</a></li>
-        <li><a href="#quotes">Selected Articles</a></li>
-        <li><a href="#links">Additional Links</a></li>
+        {{#if game.awards}}
+            <li><a href="#awards">Awards &amp; Recognition</a></li>
+        {{/if}}
+        {{#if game.quotes}}
+            <li><a href="#quotes">Selected Articles</a></li>
+        {{/if}}
+        {{#if game.press_can_request_copy}}
+            <li><a href="#pressrequest">Request Press Copy</a></li>
+        {{/if}}
+        {{#if game.video_monetization_allowed}}
+            <li><a href="#monetize">Monetization Permission</a></li>
+        {{/if}}
+        {{#if game.additional_links}}
+            <li><a href="#links">Additional Links</a></li>
+        {{/if}}
         <li><a href="#about">About {{company.title}}</a></li>
         <li><a href="#credits">Team</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
-</div>
 
-{{else}}
+{{else}}{{#if company}}
 
-<h1>{{company.title}}</h1>
-<a href="{{company.webiste}}">{{parselink company.website}}</a>
+    <h1 class="nav-header">{{company.title}}</h1>
+    <a class="nav-header" href="{{company.website}}">{{parselink company.website}}</a>
 
-<div data-spy="affix" data-offset-top="10">
     <ul class="nav nav-pills nav-stacked">
         <li><a href="#factsheet">Factsheet</a></li>
         <li><a href="#description">Description</a></li>
@@ -41,12 +47,23 @@
         <li><a href="#trailers">Videos</a></li>
         <li><a href="#images">Images</a></li>
         <li><a href="#logo">Logo &amp; Icon</a></li>
-        <li><a href="#awards">Awards &amp; Recognition</a></li>
-        <li><a href="#quotes">Selected Articles</a></li>
-        <li><a href="#links">Additional Links</a></li>
+        {{#if company.awards}}
+            <li><a href="#awards">Awards &amp; Recognition</a></li>
+        {{/if}}
+        {{#if company.quotes}}
+            <li><a href="#quotes">Selected Articles</a></li>
+        {{/if}}
+        {{#if company.additional_links}}
+            <li><a href="#links">Additional Links</a></li>
+        {{/if}}
         <li><a href="#credits">Team</a></li>
         <li><a href="#contact">Contact</a></li>
     </ul>
-</div>
 
-{{/if}}
+{{else}}
+
+    <h1 class="nav-header">Thanks</h1>
+
+{{/if}}{{/if}}
+
+</div>

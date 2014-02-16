@@ -43,13 +43,13 @@ trailers:
 
 awards:
     - description: Winner in this highly relevant contest.
-      info: Award Location, 20 Octover, 2989
+      info: Award Location, 20 October, 1989
     - description: Nomination for this prestigious award.
-      info: Award Ceremony, 4 December, 2991
+      info: Award Ceremony, 4 December, 1991
     - description: Winner in this highly relevant contest.
-      info: Award Location, 20 Octover, 2989
+      info: Award Location, 20 October, 1989
     - description: Nomination for this prestigious award.
-      info: Award Ceremony, 4 December, 2991
+      info: Award Ceremony, 4 December, 1991
 
 quotes:
     - description: This is a rather insignificant quote by a highly important person.
@@ -60,9 +60,6 @@ quotes:
       name: Some Guy
       website: This Page Is Visited By 12 Visitors A Month
       link: http://geocities.blog.com
-
-press_can_request_copy: true
-video_monetization_allowed: true
 
 additional_links:
     - title: Company Link 1
@@ -89,7 +86,8 @@ contacts:
     - name: Web
       link: MyCompanyName.com
 
-
+# Google Analytics
+analytics: UA-XXXXX-X
 
 
 
