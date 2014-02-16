@@ -13,8 +13,13 @@
 ## Quickstart
 
 #### 0. Install NPM & Grunt.js
-* NPM is included with Node.js - if you don't already have it, you can get it at [http://nodejs.org/](http://nodejs.org/)
-* With NPM installed, you can globally install the Grunt.js CLI (command line interface) by running the following command at the command line:
+* NPM is included with Node.js - if you don't already have it, you can get it at [http://nodejs.org/](http://nodejs.org/). Verify your install by running the following command at the command line:
+
+````bash
+npm -v
+````
+
+* With NPM installed, you can install the Grunt.js CLI (command line interface) by running the following command at the command line:
 
 ````bash
 npm install -g grunt-cli
