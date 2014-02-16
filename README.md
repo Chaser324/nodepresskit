@@ -35,7 +35,7 @@ npm install -g grunt-cli
 Do *one* of the following:
 
 * [Download][download] a .zip archive of this project.
-* From the command line: `git clone git://github.com/chasepettit/nodepresskit.git`
+* From the command line: `git clone git://github.com/Chaser324/nodepresskit.git`
 
 #### 2. Install dependencies
 `cd` into this project's directory and run the following command:
