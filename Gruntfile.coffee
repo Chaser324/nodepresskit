@@ -199,9 +199,9 @@ module.exports = (grunt) ->
                         'data/images',
                         'data/logos',
                         'data/trailers',
-                        'data/sample_game/images',
-                        'data/sample_game/logos',
-                        'data/sample_game/trailers'
+                        'data/games/sample_game/images',
+                        'data/games/sample_game/logos',
+                        'data/games/sample_game/trailers'
                     ]
 
         assemble: assembleConfig
