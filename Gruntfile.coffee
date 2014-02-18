@@ -193,15 +193,16 @@ module.exports = (grunt) ->
                     livereload: true
 
         mkdir:
-            options:
-                create: [
-                    'data/images',
-                    'data/logos',
-                    'data/trailers',
-                    'data/sample_game/images',
-                    'data/sample_game/logos',
-                    'data/sample_game/trailers'
-                ]
+            all:
+                options:
+                    create: [
+                        'data/images',
+                        'data/logos',
+                        'data/trailers',
+                        'data/sample_game/images',
+                        'data/sample_game/logos',
+                        'data/sample_game/trailers'
+                    ]
 
         assemble: assembleConfig
 
