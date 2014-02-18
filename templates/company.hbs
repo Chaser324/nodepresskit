@@ -13,56 +13,76 @@
         <p>
             <strong>Developer:</strong><br>
             <a href="">{{company.title}}</a><br>
-            Based in {{company.based_in}}
+            {{#if company.based_in}}Based in {{company.based_in}}{{/if}}
         </p>
-        <p>
-            <strong>Founding Date:</strong><br>
-            {{company.founding_date}}
-        </p>
-        <p>
-            <strong>Website:</strong><br>
-            <a href="{{company.website}}">{{parselink company.website}}</a>
-        </p>
+        {{#if company.founding_date}}
+            <p>
+                <strong>Founding Date:</strong><br>
+                {{company.founding_date}}
+            </p>
+        {{/if}}
+        {{#if company.website}}
+            <p>
+                <strong>Website:</strong><br>
+                <a href="{{company.website}}">{{parselink company.website}}</a>
+            </p>
+        {{/if}}
         <p>
             <strong>Press / Business Contact:</strong><br>
             <a href="mailto:{{company.press_contact}}">{{company.press_contact}}</a>
         </p>
-        <p>
-            <strong>Social:</strong><br>
-            {{#each company.social_media}}
-                <a href="{{link}}">{{name}}</a><br>
-            {{/each}}
-        </p>
-        <p>
-            <strong>Releases:</strong><br>
-            {{#each games}}
-                <a href="games/{{this}}">{{capitalize this}}</a><br>
-            {{/each}}
-        </p>
-        <p>
-            <strong>Address:</strong><br>
-            {{breaklines company.address}}
-        </p>
+        {{#if company.social_media}}
+            <p>
+                <strong>Social:</strong><br>
+                {{#each company.social_media}}
+                    <a href="{{link}}">{{name}}</a><br>
+                {{/each}}
+            </p>
+        {{/if}}
+        {{#if games}}
+            <p>
+                <strong>Releases:</strong><br>
+                {{#each games}}
+                    <a href="games/{{this}}">{{capitalize this}}</a><br>
+                {{/each}}
+            </p>
+        {{/if}}
+        {{#if company.address}}
+            <p>
+                <strong>Address:</strong><br>
+                {{breaklines company.address}}
+            </p>
+        {{/if}}
         <p>
             <strong>Phone:</strong><br>
-            {{company.phone}}
+            {{#if company.phone}}
+                {{company.phone}}
+            {{else}}
+                N/A
+            {{/if}}
         </p>
     </div>
 
     <div class="col-md-8">
-        <h2 id="description">Description</h2>
-        <p>{{company.description}}</p>
-        <h2 id="history">History</h2>
-        {{#each company.history}}
-            <h3>{{header}}</h3>
-            <p>{{text}}</p>
-        {{/each}}
-        <h2 id="projects">Projects</h2>
-        <ul>
-        {{#each games}}
-            <li><a href="games/{{this}}">{{capitalize this}}</a></li>
-        {{/each}}
-        </ul>
+        {{#if company.description}}
+            <h2 id="description">Description</h2>
+            <p>{{company.description}}</p>
+        {{/if}}
+        {{#if company.history}}
+            <h2 id="history">History</h2>
+            {{#each company.history}}
+                <h3>{{header}}</h3>
+                <p>{{text}}</p>
+            {{/each}}
+        {{/if}}
+        {{#if games}}
+            <h2 id="projects">Projects</h2>
+            <ul>
+            {{#each games}}
+                <li><a href="games/{{this}}">{{capitalize this}}</a></li>
+            {{/each}}
+            </ul>
+        {{/if}}
     </div>
 
 </div>
