@@ -192,6 +192,17 @@ module.exports = (grunt) ->
                     base: "dist/"
                     livereload: true
 
+        mkdir:
+            options:
+                create: [
+                    'data/images',
+                    'data/logos',
+                    'data/trailers',
+                    'data/sample_game/images',
+                    'data/sample_game/logos',
+                    'data/sample_game/trailers'
+                ]
+
         assemble: assembleConfig
 
         watch:
@@ -222,5 +233,9 @@ module.exports = (grunt) ->
 
     grunt.registerTask 'dev', [
         'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble', 'connect', 'watch'
+    ]
+
+    grunt.registerTask 'init', [
+        'mkdir'
     ]
 
