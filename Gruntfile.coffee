@@ -225,6 +225,7 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-less'
     grunt.loadNpmTasks 'grunt-contrib-uglify'
     grunt.loadNpmTasks 'grunt-contrib-watch'
+    grunt.loadNpmTasks 'grunt-mkdir'
     grunt.loadNpmTasks 'assemble'
 
     grunt.registerTask 'default', [
