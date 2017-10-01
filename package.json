@@ -35,7 +35,7 @@
     "lodash": "~2.4.1",
     "pretty": "~0.1.2",
     "grunt-contrib-connect": "~0.6.0",
-    "bower": "~1.2.8",
+    "bower": "1.8.2",
     "grunt-contrib-less": "~0.9.0",
     "grunt-contrib-coffee": "~0.10.0",
     "grunt-contrib-uglify": "~0.3.2",
