@@ -1,4 +1,6 @@
 # nodepresskit
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/OiYouYeahYou/nodepresskit.svg)](https://greenkeeper.io/)
 > An implementation of [@ramiismail](https://github.com/ramiismail)'s [presskit()](https://github.com/ramiismail/dopresskit) using [Assemble](http://assemble.io) - a Node.js/Grunt.js based static site builder.
 
 **This is currently in active development and should be considered a beta. Please contact Chase Pettit via [e-mail](mailto:chasepettit@gmail.com) or [Twitter](https://twitter.com/chasepettit) with any issues or suggestions. Thanks.**
