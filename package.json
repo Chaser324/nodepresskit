@@ -19,7 +19,7 @@
     "postinstall": "bower install && grunt init"
   },
   "license": "GNU GPL",
-  "main": "Gruntfile.coffee",
+  "main": "Gruntfile.js",
   "dependencies": {},
   "devDependencies": {
     "grunt": "~0.4.2",
