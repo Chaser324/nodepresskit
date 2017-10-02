@@ -5,14 +5,19 @@ const KB = 1024;
 const MB = KB * KB;
 const GB = MB * KB;
 
+var site, pkg;
+
 module.exports = function ( grunt ) {
+	const bower = 'assets/vendor/bower';
+	site = grunt.file.readYAML( '_config.yml' );
+	pkg = grunt.file.readJSON( 'package.json' );
 	var assembleConfig = createAssemblyConfig( grunt );
 
 	grunt.initConfig( {
-		pkg: grunt.file.readJSON( 'package.json' ),
+		pkg: pkg,
 		vendor: grunt.file.readJSON( '.bowerrc' ).directory,
-		site: grunt.file.readYAML( '_config.yml' ),
-		clean: [ '<%= site.dest %>' ],
+		site: site,
+		clean: [ site.dest ],
 		copy: {
 			main: {
 				files: [ {
@@ -37,31 +42,31 @@ module.exports = function ( grunt ) {
 				},
 				files: {
 					'dist/assets/js/scripts.min.js': [
-						'assets/vendor/bower/bootstrap/js/transition.js',
-						'assets/vendor/bower/bootstrap/js/alert.js',
-						'assets/vendor/bower/bootstrap/js/button.js',
-						'assets/vendor/bower/bootstrap/js/carousel.js',
-						'assets/vendor/bower/bootstrap/js/collapse.js',
-						'assets/vendor/bower/bootstrap/js/dropdown.js',
-						'assets/vendor/bower/bootstrap/js/modal.js',
-						'assets/vendor/bower/bootstrap/js/tooltip.js',
-						'assets/vendor/bower/bootstrap/js/popover.js',
-						'assets/vendor/bower/bootstrap/js/scrollspy.js',
-						'assets/vendor/bower/bootstrap/js/tab.js',
-						'assets/vendor/bower/bootstrap/js/affix.js',
-						'assets/vendor/bower/eventEmitter/EventEmitter.js',
-						'assets/vendor/bower/eventie/eventie.js',
-						'assets/vendor/bower/doc-ready/doc-ready.js',
-						'assets/vendor/bower/get-style-property/get-style-property.js',
-						'assets/vendor/bower/get-size/get-size.js',
-						'assets/vendor/bower/jquery-bridget/jquery.bridget.js',
-						'assets/vendor/bower/matches-selector/matches-selector.js',
-						'assets/vendor/bower/outlayer/item.js',
-						'assets/vendor/bower/outlayer/outlayer.js',
-						'assets/vendor/bower/masonry/masonry.js',
-						'assets/vendor/bower/imagesloaded/imagesloaded.js',
-						'assets/js/*.js',
-						'dist/assets/js/*.js'
+						`${ bower }/bootstrap/js/transition.js`,
+						`${ bower }/bootstrap/js/alert.js`,
+						`${ bower }/bootstrap/js/button.js`,
+						`${ bower }/bootstrap/js/carousel.js`,
+						`${ bower }/bootstrap/js/collapse.js`,
+						`${ bower }/bootstrap/js/dropdown.js`,
+						`${ bower }/bootstrap/js/modal.js`,
+						`${ bower }/bootstrap/js/tooltip.js`,
+						`${ bower }/bootstrap/js/popover.js`,
+						`${ bower }/bootstrap/js/scrollspy.js`,
+						`${ bower }/bootstrap/js/tab.js`,
+						`${ bower }/bootstrap/js/affix.js`,
+						`${ bower }/eventEmitter/EventEmitter.js`,
+						`${ bower }/eventie/eventie.js`,
+						`${ bower }/doc-ready/doc-ready.js`,
+						`${ bower }/get-style-property/get-style-property.js`,
+						`${ bower }/get-size/get-size.js`,
+						`${ bower }/jquery-bridget/jquery.bridget.js`,
+						`${ bower }/matches-selector/matches-selector.js`,
+						`${ bower }/outlayer/item.js`,
+						`${ bower }/outlayer/outlayer.js`,
+						`${ bower }/masonry/masonry.js`,
+						`${ bower }/imagesloaded/imagesloaded.js`,
+						`assets/js/*.js`,
+						`dist/assets/js/*.js`
 					]
 				}
 			}
@@ -145,15 +150,15 @@ function createStandardOptions() {
 	return {
 		flatten: true,
 		production: false,
-		assets: '<%= site.assets %>',
+		assets: site.assets,
 		postprocess: require( 'pretty' ),
-		pkg: '<%= pkg %>',
-		site: '<%= site %>',
-		partials: '<%= site.includes %>',
-		layoutdir: '<%= site.layouts %>',
-		layout: '<%= site.layout %>',
-		helpers: '<%= site.helpers %>',
-		plugins: '<%= site.plugins %>'
+		pkg: pkg,
+		site: site,
+		partials: site.includes,
+		layoutdir: site.layouts,
+		layout: site.layout,
+		helpers: site.helpers,
+		plugins: site.plugin
 	};
 };
 
@@ -178,33 +183,38 @@ function expand( grunt, opts, path ) {
 }
 
 function createAssemblyConfig( grunt ) {
+	var config = {
+		company: {
+			options: createStandardOptions(),
+			files: {}
+		},
+		credits: {
+			options: createStandardOptions(),
+			files: {}
+		}
+	};
+
 	const root = 'data/';
 	const opts = { cwd: 'data' };
 
-	var options = createStandardOptions();
+	var options = config.company.options;
 		options.data = 'data/company.yml';
 		options.games = [];
-		options.logos = expand( grunt, opts, 'logos/*' + imgExt );
+		options.logos = expand( grunt, opts, `logos/*${ imgExt }` );
 		options.logos_zip = expand( grunt, opts, 'logos/*.zip' );
 		options.images = expand( grunt, opts,
-			[ 'images/*' + imgExt, '!images/header' + imgExt ]
+			[ `images/*${ imgExt }`, `!images/header${ imgExt }` ]
 		);
-		options.image_header = expand( grunt, opts, 'images/header' + imgExt );
+		options.image_header = expand( grunt,opts, `images/header${ imgExt }` );
 		options.images_zip = expand( grunt, opts, 'images/*.zip' );
 		options.images_zip_size = getSize( grunt, root + options.images_zip );
 		options.logos_zip_size = getSize( grunt, root + options.logos_zip );
 
-	var files = {
-		'<%= site.dest %>/index.html': [ '<%= site.templates %>/company.hbs' ]
-	};
+	var indexPath = `${ site.dest }/index.html`;
+	var creditsPath = `${ site.dest }/credits.html`;
 
-	var credits = { options: createStandardOptions() };
-		credits.files = {
-			'<%= site.dest %>/credits.html':
-				[ '<%= site.templates %>/credits.hbs' ]
-		};
-
-	var config = { company: { options, files }, credits };
+	config.company.files[ indexPath ] = [ `${ site.templates }/company.hbs` ]
+	config.credits.files[ creditsPath ] = [ `${ site.templates }/credits.hbs` ]
 
 	grunt.file.expand( 'data/games/*' ).forEach(
 		value =>{
@@ -219,27 +229,26 @@ function createAssemblyConfig( grunt ) {
 }
 
 function gameConfig( grunt, game ) {
-	var dataFile = `data/games/${ game }/game.yml`;
-	var opts = { cwd: `data/games/${ game }` };
-	var root = `data/games/${ game }/`;
-	var destFile = `<%= site.dest %>/games/${ game }/index.html`;
+	var data = `data/games/${ game }`;
+	var dataFile = `${ data }/game.yml`;
+	var opts = { cwd: `${ data }` };
+	var root = `${ data }/`;
+	var destFile = `${ site.dest }/games/${ game }/index.html`;
 
 	var options = createStandardOptions();
 		options.data = [ dataFile, 'data/company.yml' ];
-		options.logos = expand( grunt, opts, 'logos/*' + imgExt );
+		options.logos = expand( grunt, opts, `logos/*${ imgExt }` );
 		options.logos_zip = expand( grunt, opts, 'logos/*.zip' );
 		options.images = expand( grunt, opts,
-			[ 'images/*' + imgExt, '!images/header' + imgExt ]
+			[ `images/*${ imgExt }`, `!images/header${ imgExt }` ]
 		);
-		options.image_header = expand( grunt, opts,
-			'images/header' + imgExt
-		);
+		options.image_header = expand( grunt,opts, `images/header${ imgExt }` );
 		options.images_zip = expand( grunt, opts, 'images/*.zip' );
 		options.images_zip_size = getSize( grunt, root + options.images_zip );
 		options.logos_zip_size = getSize( grunt, root + options.logos_zip );
 
 	var files = {};
-		files[ destFile ] = [ '<%= site.templates %>/game.hbs' ];
+		files[ destFile ] = [ `${ site.templates }/game.hbs` ];
 
 	return { options, files };
 }
