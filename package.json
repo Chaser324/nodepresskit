@@ -15,12 +15,15 @@
     "url": "https://github.com/chasepettit/nodepresskit/issues"
   },
   "scripts": {
+    "server": "grunt default && node app",
     "test": "grunt default && node test",
     "postinstall": "bower install && grunt init"
   },
   "license": "GNU GPL",
   "main": "Gruntfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.16.1"
+  },
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-cli": "~0.1.13",
