@@ -15,6 +15,7 @@ module.exports = function ( grunt ) {
 
 	var assembleConfig = createAssemblyConfig( grunt );
 
+	grunt.option( 'stack', true );
 	grunt.initConfig( {
 		pkg: pkg,
 		vendor: grunt.file.readJSON( '.bowerrc' ).directory,
