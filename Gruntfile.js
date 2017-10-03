@@ -11,6 +11,7 @@ module.exports = function ( grunt ) {
 	const bower = 'assets/vendor/bower';
 	site = grunt.file.readYAML( '_config.yml' );
 	pkg = grunt.file.readJSON( 'package.json' );
+
 	var assembleConfig = createAssemblyConfig( grunt );
 
 	grunt.initConfig( {
@@ -148,17 +149,20 @@ module.exports = function ( grunt ) {
 
 function createStandardOptions() {
 	return {
-		flatten: true,
-		production: false,
-		assets: site.assets,
-		postprocess: require( 'pretty' ),
-		pkg: pkg,
-		site: site,
-		partials: site.includes,
-		layoutdir: site.layouts,
-		layout: site.layout,
-		helpers: site.helpers,
-		plugins: site.plugin
+		options: {
+			flatten: true,
+			production: false,
+			assets: site.assets,
+			postprocess: require( 'pretty' ),
+			pkg: pkg,
+			site: site,
+			partials: site.includes,
+			layoutdir: site.layouts,
+			layout: site.layout,
+			helpers: site.helpers,
+			plugins: site.plugin
+		},
+		files: {}
 	};
 };
 
@@ -178,35 +182,30 @@ function getSize( grunt, f ) {
 		return parseInt( size / GB ) + ' GB';
 }
 
-function expand( grunt, opts, path ) {
+function expand( { grunt, opts }, path ) {
 	return grunt.file.expand( opts, path );
 }
 
 function createAssemblyConfig( grunt ) {
 	var config = {
-		company: {
-			options: createStandardOptions(),
-			files: {}
-		},
-		credits: {
-			options: createStandardOptions(),
-			files: {}
-		}
+		company: createStandardOptions(),
+		credits: createStandardOptions()
 	};
 
 	const root = 'data/';
-	const opts = { cwd: 'data' };
+	const opts = { cwd: root };
+	var pack = { grunt, opts };
 
 	var options = config.company.options;
 		options.data = 'data/company.yml';
 		options.games = [];
-		options.logos = expand( grunt, opts, `logos/*${ imgExt }` );
-		options.logos_zip = expand( grunt, opts, 'logos/*.zip' );
-		options.images = expand( grunt, opts,
+		options.logos = expand( pack, `logos/*${ imgExt }` );
+		options.logos_zip = expand( pack, 'logos/*.zip' );
+		options.images = expand( pack,
 			[ `images/*${ imgExt }`, `!images/header${ imgExt }` ]
 		);
-		options.image_header = expand( grunt,opts, `images/header${ imgExt }` );
-		options.images_zip = expand( grunt, opts, 'images/*.zip' );
+		options.image_header = expand( pack, `images/header${ imgExt }` );
+		options.images_zip = expand( pack, 'images/*.zip' );
 		options.images_zip_size = getSize( grunt, root + options.images_zip );
 		options.logos_zip_size = getSize( grunt, root + options.logos_zip );
 
@@ -220,6 +219,8 @@ function createAssemblyConfig( grunt ) {
 		value =>{
 			var game = value.replace( 'data/games/', '' );
 
+			if ( game === 'sample_game' ) return;
+
 			options.games.push( game );
 			config[ game ] = gameConfig( grunt, game )
 		}
@@ -229,26 +230,26 @@ function createAssemblyConfig( grunt ) {
 }
 
 function gameConfig( grunt, game ) {
-	var data = `data/games/${ game }`;
-	var dataFile = `${ data }/game.yml`;
-	var opts = { cwd: `${ data }` };
-	var root = `${ data }/`;
-	var destFile = `${ site.dest }/games/${ game }/index.html`;
+	var config = createStandardOptions();
 
-	var options = createStandardOptions();
-		options.data = [ dataFile, 'data/company.yml' ];
-		options.logos = expand( grunt, opts, `logos/*${ imgExt }` );
-		options.logos_zip = expand( grunt, opts, 'logos/*.zip' );
-		options.images = expand( grunt, opts,
+	var root = `data/games/${ game }/`;
+	var opts = { cwd: root };
+	var pack = { grunt, opts };
+
+	var options = config.options;
+		options.data = [ `${ root }game.yml`, 'data/company.yml' ];
+		options.logos = expand( pack, `logos/*${ imgExt }` );
+		options.logos_zip = expand( pack, 'logos/*.zip' );
+		options.images = expand( pack,
 			[ `images/*${ imgExt }`, `!images/header${ imgExt }` ]
 		);
-		options.image_header = expand( grunt,opts, `images/header${ imgExt }` );
-		options.images_zip = expand( grunt, opts, 'images/*.zip' );
+		options.image_header = expand( pack, `images/header${ imgExt }` );
+		options.images_zip = expand( pack, 'images/*.zip' );
 		options.images_zip_size = getSize( grunt, root + options.images_zip );
 		options.logos_zip_size = getSize( grunt, root + options.logos_zip );
 
-	var files = {};
-		files[ destFile ] = [ `${ site.templates }/game.hbs` ];
+	var destFile = `${ site.dest }/games/${ game }/index.html`;
+	config.files[ destFile ] = [ `${ site.templates }/game.hbs` ];
 
-	return { options, files };
+	return config;
 }
