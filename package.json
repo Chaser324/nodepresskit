@@ -15,9 +15,9 @@
     "url": "https://github.com/chasepettit/nodepresskit/issues"
   },
   "scripts": {
-    "start": "grunt default && node app",
-    "test": "grunt default && node test",
-    "postinstall": "bower install && grunt init"
+    "start": "grunt default --stack && node app",
+    "test": "grunt default --stack && node test",
+    "postinstall": "bower install && grunt init --stack"
   },
   "license": "GNU GPL",
   "main": "Gruntfile.js",
