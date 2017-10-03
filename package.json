@@ -24,8 +24,8 @@
   "dependencies": {
     "express": "^4.16.1",
     "directory-tree": "*",
-    "assemble-contrib-anchors": "~0.1.1",
-    "assemble-contrib-toc": "~0.1.2",
+    "assemble-middleware-anchors": "~0.1.1",
+    "assemble-middleware-toc": "~0.1.2",
     "handlebars-helper-prettify": "~0.2.1",
     "handlebars-helper-slugify": "~0.2.0",
     "lodash": "~2.4.1",
