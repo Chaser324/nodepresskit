@@ -185,7 +185,10 @@ function getSize( grunt, f ) {
 		return parseInt( size / GB ) + ' GB';
 }
 
-function expand( { grunt, opts }, path ) {
+function expand( pack, path ) {
+	var grunt = pack.grunt;
+	var opts = pack.opts;
+
 	return grunt.file.expand( opts, path );
 }
 
@@ -219,7 +222,7 @@ function createAssemblyConfig( grunt ) {
 	config.credits.files[ creditsPath ] = [ `${ site.templates }/credits.hbs` ]
 
 	grunt.file.expand( 'data/games/*' ).forEach(
-		value =>{
+		function ( value ) {
 			var game = value.replace( 'data/games/', '' );
 
 			if ( game === 'sample_game' ) return;
