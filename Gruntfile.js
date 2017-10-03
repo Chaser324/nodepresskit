@@ -15,7 +15,31 @@ module.exports = function ( grunt ) {
 
 	var assembleConfig = createAssemblyConfig( grunt );
 
+	grunt.loadNpmTasks( 'grunt-assemble' );
+	grunt.loadNpmTasks( 'grunt-contrib-clean' );
+	grunt.loadNpmTasks( "grunt-contrib-connect" );
+	grunt.loadNpmTasks( 'grunt-contrib-copy' );
+	grunt.loadNpmTasks( 'grunt-contrib-coffee' );
+	grunt.loadNpmTasks( 'grunt-contrib-less' );
+	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
+	grunt.loadNpmTasks( 'grunt-contrib-watch' );
+	grunt.loadNpmTasks( 'grunt-mkdir' );
+
+	grunt.registerTask(
+		'default',
+		[ 'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble' ]
+	);
+	grunt.registerTask(
+		'dev',
+		[ 'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble', 'connect', 'watch' ]
+	);
+	grunt.registerTask(
+		'init',
+		[ 'mkdir' ]
+	);
+
 	grunt.option( 'stack', true );
+
 	grunt.initConfig( {
 		pkg: pkg,
 		vendor: grunt.file.readJSON( '.bowerrc' ).directory,
@@ -124,29 +148,6 @@ module.exports = function ( grunt ) {
 			}
 		}
 	} );
-
-	grunt.loadNpmTasks( 'grunt-assemble' );
-	grunt.loadNpmTasks( 'grunt-contrib-clean' );
-	grunt.loadNpmTasks( "grunt-contrib-connect" );
-	grunt.loadNpmTasks( 'grunt-contrib-copy' );
-	grunt.loadNpmTasks( 'grunt-contrib-coffee' );
-	grunt.loadNpmTasks( 'grunt-contrib-less' );
-	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-	grunt.loadNpmTasks( 'grunt-contrib-watch' );
-	grunt.loadNpmTasks( 'grunt-mkdir' );
-
-	grunt.registerTask(
-		'default',
-		[ 'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble' ]
-	);
-	grunt.registerTask(
-		'dev',
-		[ 'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble', 'connect', 'watch' ]
-	);
-	return grunt.registerTask(
-		'init',
-		[ 'mkdir' ]
-	);
 };
 
 function createStandardOptions() {
