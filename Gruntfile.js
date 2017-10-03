@@ -1,4 +1,5 @@
-var fs = require( 'fs' );
+const fs = require( 'fs' );
+const pretty = require( 'pretty' );
 
 const imgExt = '.{png,jpg,gif,tiff,webp}';
 const KB = 1024;
@@ -123,6 +124,7 @@ module.exports = function ( grunt ) {
 		}
 	} );
 
+	grunt.loadNpmTasks( 'grunt-assemble' );
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 	grunt.loadNpmTasks( "grunt-contrib-connect" );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
@@ -131,7 +133,6 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-mkdir' );
-	grunt.loadNpmTasks( 'grunt-assemble' );
 
 	grunt.registerTask(
 		'default',
@@ -153,7 +154,7 @@ function createStandardOptions() {
 			flatten: true,
 			production: false,
 			assets: site.assets,
-			postprocess: require( 'pretty' ),
+			postprocess: pretty,
 			pkg: pkg,
 			site: site,
 			partials: site.includes,
