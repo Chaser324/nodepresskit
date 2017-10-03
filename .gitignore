@@ -8,6 +8,8 @@ data/**/images/*
 data/**/logos/*
 data/**/trailers/*
 
+.vscode/
+
 #########
 # Bower #
 #########

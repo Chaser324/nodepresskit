@@ -4,6 +4,7 @@
 *.* eol=lf
 
 *.jpg binary
+*.webp binary
 *.gif binary
 *.png binary
 *.jpeg binary
