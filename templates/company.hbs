@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         {{#if image_header}}
-            <img class="img-responsive" src="{{image_header}}" />
+            <img class="img-responsive" style="margin-bottom: 20px;" src="{{image_header}}" />
         {{/if}}
     </div>
 </div>
@@ -64,6 +64,12 @@
     </div>
 
     <div class="col-md-8">
+		<a href="./company.zip">
+			<div class="download">
+				Download presskit ~ .zip
+			</div>
+		</a>
+
         {{#if company.description}}
             <h2 id="description">Description</h2>
             <p>{{company.description}}</p>

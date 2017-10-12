@@ -1,5 +1,6 @@
 const fs = require( 'fs' );
 const pretty = require( 'pretty' );
+const archiver = require( 'archiver' );
 
 const imgExt = '.{png,jpg,gif,tiff,webp}';
 const KB = 1024;
@@ -25,13 +26,15 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-mkdir' );
 
+	grunt.registerTask( 'makeZip', makeZip );
+
 	grunt.registerTask(
 		'default',
-		[ 'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble' ]
+		[ 'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble', 'makeZip' ]
 	);
 	grunt.registerTask(
 		'dev',
-		[ 'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble', 'connect', 'watch' ]
+		[ 'clean', 'coffee', 'uglify', 'less', 'copy', 'assemble', 'makeZip', 'connect', 'watch' ]
 	);
 	grunt.registerTask(
 		'init',
@@ -175,6 +178,10 @@ function getSize( grunt, f ) {
 
 	var size = fs.statSync( f ).size;
 
+	return parseSize( size );
+}
+
+function parseSize( size ) {
 	if ( size < KB )
 		return parseInt( size ) + ' B';
 	else if ( size < MB )
@@ -258,4 +265,35 @@ function gameConfig( grunt, game ) {
 	config.files[ destFile ] = [ `${ site.templates }/game.hbs` ];
 
 	return config;
+}
+
+function makeZip() {
+	console.log( 'Making Zip files' );
+	var path = `${ __dirname }/${ site.root }/company.zip`
+	var output = fs.createWriteStream( path );
+	var archive = archiver( 'zip', { zlib: { level: 9 } } );
+	var done = this.async();
+
+	output.on( 'close', function () {
+		var size = parseSize( archive.pointer() )
+
+		console.log( `Archive has been created. ${ size } total bytes` );
+
+		setTimeout( function () { done() }, 2000);
+	} );
+
+	archive.on( 'warning', function ( err ) {
+		if ( err.code !== 'ENOENT' )
+			throw err;
+	} );
+
+	archive.on( 'error', function ( err ) {
+		throw err;
+	} );
+
+	archive.pipe( output );
+
+	archive.directory( 'dist/', false );
+
+	archive.finalize();
 }
